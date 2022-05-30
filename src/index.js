@@ -45,7 +45,7 @@ const renderHits = hits => {
     <div class="photo-card">
         <a href="${hit.largeImageURL}">
             <img src="${hit.webformatURL}" alt="${hit.tags}" loading="lazy" />
-        </a>
+        
         <div class="info">
             <p class="info-item">
                 <b>Likes</b>
@@ -64,6 +64,7 @@ const renderHits = hits => {
                 ${hit.downloads}
             </p>
         </div>
+        </a>
     </div> 
             `
     )

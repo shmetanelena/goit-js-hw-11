@@ -27,12 +27,7 @@ const fetchHits = async () => {
     page: page,
     per_page: limit,
   });
-  /*return fetch(`https://pixabay.com/api/?${params}`).then(response => {
-    if (!response.ok) {
-      throw new Error(response.status);
-    }
-    return response.json();
-  });*/
+
   const response = await axios.get(`https://pixabay.com/api/?${params}`);
   return response.data;
 };
@@ -91,25 +86,6 @@ form.addEventListener('submit', async e => {
   page = 1;
   totalPages = 1;
 
-  /*fetchHits()
-    .then(data => {
-      if (data.totalHits === 0) {
-        Notify.failure(
-          'Sorry, there are no images matching your search query. Please try again.'
-        );
-        return;
-      }
-      renderHits(data.hits);
-      Notify.success(`Hooray! We found ${data.totalHits} images.`);
-      totalPages = data.totalHits / limit;
-      console.log(`Total hits=${data.totalHits}, pages=${totalPages}`);
-      if (totalPages > 1) {
-        loadMoreButton.classList.remove('unvisible');
-      }
-      page += 1;
-    })
-    .catch(e => console.log(e));*/
-
   try {
     const data = await fetchHits();
     if (data.totalHits === 0) {
@@ -143,29 +119,5 @@ loadMoreButton.addEventListener('click', async () => {
     }
   } catch (e) {
     console.log(e);
-  }
-});
-
-/**
- * To remove
- */
-document.addEventListener('keydown', e => {
-  if (
-    e.key === 'ArrowDown' &&
-    !loadMoreButton.classList.contains('unvisible')
-  ) {
-    fetchHits()
-      .then(data => {
-        renderHits(data.hits);
-        console.log(page + ' from ' + totalPages);
-        page += 1;
-        if (page > totalPages) {
-          loadMoreButton.classList.add('unvisible');
-          Notify.info(
-            "We're sorry, but you've reached the end of search results."
-          );
-        }
-      })
-      .catch(e => console.log(e));
   }
 });

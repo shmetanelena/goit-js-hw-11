@@ -79,7 +79,6 @@ const renderHits = hits => {
 
 form.addEventListener('submit', async e => {
   e.preventDefault();
-
   searchWord = e.currentTarget.elements.searchQuery.value.trim();
   gallery.innerHTML = '';
   loadMoreButton.classList.add('unvisible');

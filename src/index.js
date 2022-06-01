@@ -110,7 +110,6 @@ loadMoreButton.addEventListener('click', async () => {
   try {
     const data = await fetchHits();
     renderHits(data.hits);
-    // console.log(page + ' from ' + totalPages);
     page += 1;
     if (page > totalPages) {
       loadMoreButton.classList.add('unvisible');

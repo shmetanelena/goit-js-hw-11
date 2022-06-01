@@ -96,8 +96,7 @@ form.addEventListener('submit', async e => {
     }
     renderHits(data.hits);
     Notify.success(`Hooray! We found ${data.totalHits} images.`);
-    totalPages = data.totalHits / limit;
-    console.log(`Total hits=${data.totalHits}, pages=${totalPages}`);
+    totalPages = Math.ceil(data.totalHits / limit);
     if (totalPages > 1) {
       loadMoreButton.classList.remove('unvisible');
     }
@@ -111,7 +110,7 @@ loadMoreButton.addEventListener('click', async () => {
   try {
     const data = await fetchHits();
     renderHits(data.hits);
-    console.log(page + ' from ' + totalPages);
+    // console.log(page + ' from ' + totalPages);
     page += 1;
     if (page > totalPages) {
       loadMoreButton.classList.add('unvisible');
